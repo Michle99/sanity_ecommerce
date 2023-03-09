@@ -11,8 +11,17 @@ import { useStateContext } from '../../../context/StateContext';
 
 const ProductDetails = ({ product, products}) => {
     const { image, name, details, price } = product;
+    console.log("product", product);
+    
     const [index, setIndex] = useState(0);
-    const { decreaseQuantity, increaseQuantity, qty, onAdd} = useStateContext();
+    const { decreaseQuantity, increaseQuantity, 
+      qty, onAdd, setShowCart} = useStateContext();
+    
+    const handleBuyNow =  () => {
+      onAdd(product, qty);
+    
+      setShowCart(true);
+    }
 
   return (
     <div>
@@ -55,13 +64,13 @@ const ProductDetails = ({ product, products}) => {
           <div className='quantity'>
             <h3>Quantity:</h3>
             <p className='quantity-desc'>
-                <span className='minus' onClick={(e)=>decreaseQuantity(e)}>
+                <span className='minus' onClick={decreaseQuantity}>
                     <AiOutlineMinus/>
                   </span>
                   <span className='num'>
                     {qty}
                   </span>
-                  <span className='plus' onClick={(e)=>increaseQuantity(e)}>
+                  <span className='plus' onClick={increaseQuantity}>
                     <AiOutlinePlus/>
                   </span>
             </p>
@@ -71,6 +80,7 @@ const ProductDetails = ({ product, products}) => {
               onClick={() => onAdd(product, qty)}
             >Add to Cart</button>
             <button type='button' className='buy-now'
+             onClick={handleBuyNow}
             >Buy Now</button>
           </div>
         </div>
@@ -95,9 +105,10 @@ export const getStaticPaths = async () => {
         slug {
             current
         }
-    }`
+    }`;
 
     const products = await client.fetch(query);
+
     const paths = products.map((product) => ({
         params: {
             slug: product.slug.current
@@ -112,10 +123,9 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params: { slug }}) => {
     const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
-    
     const productsQuery = '*[_type == "product"]';
+    
     const product = await client.fetch(query);
-
     const products = await client.fetch(productsQuery);
   
     return {

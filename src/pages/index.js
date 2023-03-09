@@ -1,11 +1,11 @@
 import React from 'react'
-import product from '../../sanity_ecommerce/schemas/product';
-import { Product, Footer, FooterBanner, HeroBanner } from '../../components'
+import { Product, FooterBanner, HeroBanner } from '../../components'
 import { client } from '../../lib/client';
 
 
 const Home = ({ products, bannerData }) => {
   return (
+    console.log("Products from home comp", products),
     <>
       <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
       {console.log(bannerData)}

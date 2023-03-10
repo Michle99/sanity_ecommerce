@@ -4,8 +4,9 @@
 This is a ecommerce web application built with sanity, nextJS, with full cart functionality and stripe payment functionality.
 
 # Demonstration
-https://user-images.githubusercontent.com/63488970/224394160-aff904d7-d189-4ebe-af77-e828d570b521.mp4
 
+
+![ecommer_vid (1)](https://user-images.githubusercontent.com/63488970/224399657-692ce69a-4128-4d41-93fd-91e5037cde40.gif)
 
 ## Getting Started
 First, run the development server:

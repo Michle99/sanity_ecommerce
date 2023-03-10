@@ -10,7 +10,7 @@ import { Product } from '../../../components';
 import { useStateContext } from '../../../context/StateContext';
 
 const ProductDetails = ({ product, products}) => {
-    const { image, name, details, price } = product;
+    const { image, name, details, price } = product ?? {};
     console.log("product", product);
     
     const [index, setIndex] = useState(0);
@@ -36,7 +36,6 @@ const ProductDetails = ({ product, products}) => {
                 {image?.map((item, i) => (
                     <img
                      src={urlFor(item)}
-                     alt={item.name}
                      key={i}
                      className={i === index ? 
                         'small-image slected-image' :
@@ -123,7 +122,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params: { slug }}) => {
     const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
-    const productsQuery = '*[_type == "product"]';
+    const productsQuery = `*[_type == "product"]`;
     
     const product = await client.fetch(query);
     const products = await client.fetch(productsQuery);

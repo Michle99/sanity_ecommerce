@@ -67,7 +67,17 @@ width: 100%;
 .logo{
   color: gray;
   font-size: 18px;
-
+}
+.logo:hover{
+  color: #f02d34;
+}
+.logo:active{
+  color: #78f02d;
+}
+.logo-text {
+  font-size: 18px;
+  font-weight:bolder;
+  color: #f02d34;
 }
 .cart-icon{
   font-size: 25px;
